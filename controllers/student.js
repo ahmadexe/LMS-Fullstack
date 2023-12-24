@@ -26,4 +26,22 @@ const viewStudents = async (req, res, next) => {
   }
 };
 
+exports.updateStudent = async (req, res) => {
+  try {
+      const updatedStudent = await Student.findOneAndUpdate(
+          { regNo: req.params.regNo },
+          req.body,
+          { new: true }
+      );
+
+      if (!updatedStudent) {
+          return res.status(404).send("Student not found");
+      }
+
+      res.send(updatedStudent);
+  } catch (error) {
+      res.status(500).send(error.message);
+  }
+};
+
 module.exports = { addStudent, viewStudents };

@@ -4,5 +4,7 @@ const studentCtrl = require("../controllers/student");
 
 router.post("/add", studentCtrl.addStudent);
 router.get("/view", studentCtrl.viewStudents);
+router.put("/update/:regNo", studentCtrl.updateStudent);
+
 
 module.exports = router;
