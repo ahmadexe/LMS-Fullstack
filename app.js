@@ -5,6 +5,7 @@ const cors = require("cors");
 const studentRouter = require("./routes/student");
 const courseRouter = require("./routes/course");
 const teacherRouter = require("./routes/teacher");
+const attendanceRouter = require('./routes/attendance')
 
 const app = express();
 app.use(cors()); // Enable CORS for all routes
@@ -31,4 +32,4 @@ app.use(express.json());
 app.use("/api/student", studentRouter);
 app.use("/api/course", courseRouter);
 app.use("/api/teacher", teacherRouter);
-
+app.use('/api/attendance', attendanceRouter);
