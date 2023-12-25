@@ -26,7 +26,7 @@ const addMarks = async (req, res) => {
     res.status(200).send(result);
   } catch (error) {
     console.warn(error);
-  }
+}
 };
 
 const addCourse = async (req, res) => {
@@ -158,6 +158,7 @@ const deleteMarks = (req,res,next)=>{
         res.json(err)
       })
 }
+
 
 module.exports = {
   addCourse,
