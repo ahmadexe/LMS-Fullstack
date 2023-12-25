@@ -8,7 +8,7 @@ router.get("/view/:regNo", studentCtrl.viewStudentsbyRegNo);
 router.put("/update/:regNo", studentCtrl.updateStudent);
 
 router.get("/getmarks/:studentId", studentCtrl.getStudentMarks)
-
+router.delete("/delete/:regNo", studentCtrl.deleteStudent);
 router.get("/getcourses/:id", studentCtrl.getAllCoursesOfAStudent);
 
 module.exports = router;

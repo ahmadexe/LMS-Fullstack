@@ -98,7 +98,20 @@ const getAllCoursesOfAStudent = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+const deleteStudent = async (req, res, next) => {
+  try {
+    const student = await Student.findOneAndDelete({ regNo: req.params.regNo });
+    if (!student) {
+      res.status(404).json({ error: "Student not found" });
+      return;
+    }
+    res.status(200).json(student);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
-module.exports = { addStudent, viewStudents , viewStudentsbyRegNo, updateStudent, getStudentMarks};
+module.exports = { addStudent, viewStudents , viewStudentsbyRegNo, updateStudent, getStudentMarks ,deleteStudent};
 
 
