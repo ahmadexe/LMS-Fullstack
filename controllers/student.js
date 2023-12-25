@@ -54,4 +54,31 @@ const updateStudent = async (req, res) => {
   }
 };
 
-module.exports = { addStudent, viewStudents , viewStudentsbyRegNo, updateStudent};
+const getStudentMarks = async (req, res, next) => {
+  try {
+    // Find all courses where the given student is enrolled
+    const courses = await Course.find({
+      'students.id': req.params.studentId,
+    });
+
+    // Extract and return the relevant information
+    const studentMarks = courses.map((course) => {
+      const studentInfo = course.students.find((student) => student.id.equals(studentId));
+      return {
+        courseId: course._id,
+        courseName: course.name,
+        marks: studentInfo ? studentInfo.marks : null,
+      };
+    });
+
+    res.send(studentMarks);
+  } catch (error) {
+    console.error('Error fetching student marks:', error.message);
+    throw error;
+  }
+};
+
+
+
+
+module.exports = { addStudent, viewStudents , viewStudentsbyRegNo, updateStudent, getStudentMarks};

@@ -31,3 +31,4 @@ app.use(express.json());
 app.use("/api/student", studentRouter);
 app.use("/api/course", courseRouter);
 app.use("/api/teacher", teacherRouter);
+
