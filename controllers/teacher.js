@@ -107,11 +107,23 @@ const getTeacherById = async (req, res) => {
   }
 };
 
+const getAllCoursesOfATeacher = async (req, res) => {
+  const teacherId = req.params.tid;
+  try {
+    const courses = await Course.find({
+      teacher: { $elemMatch: { id: teacherId } },
+    });
+    res.json(courses);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 module.exports = {
   addTeacherToACourse,
   removeTeacherFromACourse,
   getTeachersTeachingACourse,
   getAllTeachers,
-  getTeacherById
+  getTeacherById,
+  getAllCoursesOfATeacher,
 };

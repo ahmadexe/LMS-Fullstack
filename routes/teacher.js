@@ -7,5 +7,6 @@ router.delete("/deleteTeacher", teacherCtrl.removeTeacherFromACourse);
 router.get("/viewTeachers", teacherCtrl.getTeachersTeachingACourse);
 router.get("/getAllTeachers", teacherCtrl.getAllTeachers);
 router.get("/getTeacherById/:id", teacherCtrl.getTeacherById);
+router.get("/getTeacherCourses/:tid", teacherCtrl.getAllCoursesOfATeacher);
 
 module.exports = router;
