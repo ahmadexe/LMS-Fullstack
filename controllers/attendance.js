@@ -92,6 +92,39 @@ const getAttendanceOfParticularDay = async (req, res) => {
   }
 };
 
+const getAttendanceOfLastWeek = async (req, res) => {
+  try {
+    const { studentRegNo } = req.body;
+
+    // Find the student
+    const student = await Student.findOne({ regNo: studentRegNo });
+
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    // Calculate the date one week ago
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+    // Find attendance records for the student within the last week
+    const attendanceRecords = await Attendance.find({
+      student: studentRegNo,
+      date: { $gte: oneWeekAgo },
+    });
+
+    if (!attendanceRecords || attendanceRecords.length === 0) {
+      return res.status(404).json({ error: "No attendance records found for the last week" });
+    }
+
+    // Return the attendance details
+    res.status(200).json({ attendanceRecords });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error." });
+  }
+};
+
 module.exports = {
   markAttendance,
   updateAttendence,
